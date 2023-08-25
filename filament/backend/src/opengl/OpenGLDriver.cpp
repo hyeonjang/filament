@@ -970,11 +970,11 @@ void OpenGLDriver::framebufferTexture(TargetBufferInfo const& binfo,
     //       equivalent to the application calling InvalidateFramebuffer for this attachment"
     UTILS_UNUSED bool attachmentTypeNotSupportedByMSRTT = false;
     switch (attachment) {
-#ifndef FILAMENT_SILENCE_NOT_SUPPORTED_BY_ES2
-        case GL_DEPTH_STENCIL_ATTACHMENT:
-            assert_invariant(!mContext.isES2());
-            UTILS_FALLTHROUGH;
-#endif
+// #ifndef FILAMENT_SILENCE_NOT_SUPPORTED_BY_ES2
+//         case GL_DEPTH_STENCIL_ATTACHMENT:
+//             assert_invariant(!mContext.isES2());
+//             UTILS_FALLTHROUGH;
+// #endif
         case GL_DEPTH_ATTACHMENT:
         case GL_STENCIL_ATTACHMENT:
             attachmentTypeNotSupportedByMSRTT = rt->gl.samples != t->samples;

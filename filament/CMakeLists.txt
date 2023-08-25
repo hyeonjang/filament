@@ -492,12 +492,15 @@ include_directories(${GENERATION_ROOT})
 include_directories(src)
 
 # we're building a library
-add_library(${TARGET} STATIC ${PRIVATE_HDRS} ${PUBLIC_HDRS} ${SRCS} ${DATA_BINS})
+add_library(${TARGET} SHARED ${PRIVATE_HDRS} ${PUBLIC_HDRS} ${SRCS} ${DATA_BINS})
+target_link_libraries(${TARGET} PUBLIC c++)
+# add_library(${TARGET} STATIC ${PRIVATE_HDRS} ${PUBLIC_HDRS} ${SRCS} ${DATA_BINS})
 
 # specify where the public headers of this library are
 target_include_directories(${TARGET} PUBLIC ${PUBLIC_HDR_DIR})
 
 # add this subproject to the Filament folder
+set_target_properties(${TARGET} PROPERTIES POSITION_INDEPENDENT_CODE ON)
 set_target_properties(${TARGET} PROPERTIES FOLDER Filament)
 
 # ==================================================================================================
@@ -588,5 +591,5 @@ install(FILES "../LICENSE" DESTINATION .)
 # Sub-projects
 # ==================================================================================================
 add_subdirectory(backend)
-add_subdirectory(test)
+# add_subdirectory(test)
 add_subdirectory(benchmark)

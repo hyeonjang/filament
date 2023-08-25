@@ -19,6 +19,7 @@
 
 #include <backend/PixelBufferDescriptor.h>
 
+#include <cstring>
 #include <stddef.h>
 #include <stdint.h>
 
@@ -65,12 +66,12 @@ public:
                           size_t dstBytesPerRow, size_t /*dstChannelCount*/,
                           size_t /*width*/, size_t height, bool /*swizzle*/) {
         if (srcBytesPerRow == dstBytesPerRow) {
-            std::memcpy(dest, src, height * srcBytesPerRow);
+            memcpy(dest, src, height * srcBytesPerRow);
             return;
         }
         const size_t minBytesPerRow = std::min(srcBytesPerRow, dstBytesPerRow);
         for (size_t i = 0; i < height; ++i, src += srcBytesPerRow, dest += dstBytesPerRow) {
-            std::memcpy(dest, src, minBytesPerRow);
+            memcpy(dest, src, minBytesPerRow);
         }
     }
 
